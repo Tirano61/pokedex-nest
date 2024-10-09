@@ -1,0 +1,11 @@
+
+
+
+html, body {
+    padding: 20px;  
+    background-color: rgb(223, 70, 23);  
+}
+h1{
+    font-size: 20px;
+    color: white;
+}
