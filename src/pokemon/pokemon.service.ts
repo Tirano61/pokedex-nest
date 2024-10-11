@@ -5,6 +5,7 @@ import { isValidObjectId, Model } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { throwError } from 'rxjs';
+import * as request from 'supertest';
 
 @Injectable()
 export class PokemonService {
@@ -64,8 +65,14 @@ export class PokemonService {
   }
 
   async remove(id: string) {
-    const pokemon = await this.findOne( id );
-    await pokemon.deleteOne();
+    /* const pokemon = await this.findOne( id );
+    await pokemon.deleteOne(); */
+    //const result = await this.pokemonModel.findByIdAndDelete( id );
+    const { deletedCount } = await this.pokemonModel.deleteOne({ _id: id });
+    if( deletedCount === 0)
+      throw new BadRequestException(`Pokemon with id "${id}" not found.`)
+
+    return deletedCount;
    
   }
 
