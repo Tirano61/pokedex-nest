@@ -10,7 +10,11 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
-      forbidNonWhitelisted: true
+      forbidNonWhitelisted: true,
+      transform: true, // Tranforma lo que llega en los parametros como string y deben ser numeros a numeros
+      transformOptions:  {
+        enableImplicitConversion: true
+      }
     }),
   )
 
